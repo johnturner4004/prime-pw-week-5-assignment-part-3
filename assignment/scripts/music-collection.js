@@ -65,3 +65,70 @@ console.log('%c<<<<<<<<Testing findByArtist()>>>>>>>>', 'color: black; backgroun
 findByArtist('Eminem');
 findByArtist('Unspoken');
 findByArtist('Johnny Cash');
+
+console.log('%cTo search collection type \"search()\" in the console', 'background-color: blue');
+let criteria1;
+let criteria2;
+let criteria3;
+
+const searchInput = option => {
+  switch (option) {
+    case 'album':
+      let album = prompt('Please enter the album name');
+      break;
+    case 'artist':
+      let artist = prompt('Please enter the artist name');
+      break;
+    case 'year published':
+      let yearPublished = prompt('Please enter the year published');
+      break;
+    default:
+      console.log('Invalid input');
+      searchInput(option);
+  }
+};
+
+const option2 = criteria1 => {
+  switch (criteria1) {
+    case 'artist':
+      criteria2 = prompt('Would you also like to search by album or year published? Please enter album, year published, or no', 'album, year published, or no');
+      break;
+    case 'album':
+      criteria2 = prompt('Would you also like to search by artist or year published? Please enter artist, year published, or no', 'artist, year published, or no');
+      break;
+    case 'year published':
+      criteria2 = prompt('Would you also like to search by album or artist? Please enter album, artist, or no', 'album, artist, or no');
+      break;
+    default:
+      console.log('I\'m sorry but that was not an option');
+      option2(criteria1);
+  }
+  return criteria2;
+};
+
+const option3 = (input1, input2) => {
+  switch (input1, input2) {
+    case ('artist', 'album'):
+      criteria3 = prompt('Would you also year published? Please enter year published or no', 'year published or no');
+      break;
+    case ('album', 'yearPublished'):
+      criteria3 = prompt('Would you also like to search by artist? Please enter artist or no', 'artist, or no');
+      break;
+    case ('artist', 'year published'):
+      criteria3 = prompt('Would you also like to search by album? Please enter album or no', 'album or no');
+      break;
+    default:
+      console.log('I\'m sorry but that was not an option');
+      option3(input1, input2);
+  }
+  return criteria3;
+};
+
+const search = () => {
+  criteria1 = prompt('Would you like to search by album, artist, or year published? Please enter album, artist, or year published', 'album, artist, or year published');
+  let search1 = searchInput(criteria1);
+  criteria2 = option2(criteria1);
+  let search2 = searchInput(criteria2);
+  criteria3 = option3(criteria1, criteria2);
+  let search3 = searchInput(criteria3);
+};
