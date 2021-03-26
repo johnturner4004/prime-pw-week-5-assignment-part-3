@@ -1,17 +1,46 @@
 console.log('***** Music Collection *****');
 //empty array variable to hold objects containing data about albums in collection.
-let collection = [];
+const collection = [];
+function addTracks(array, trackName, duration) {
+  array.push({
+    trackName: trackName,
+    duration: duration
+  });
+}
+const theEminemShowTracks = [];
+addTracks(theEminemShowTracks, 'Curtains Up', '0:30');
+addTracks(theEminemShowTracks, 'White America', '5:24');
+addTracks(theEminemShowTracks, 'Business', '4:11');
+addTracks(theEminemShowTracks, 'Cleanin\' Out My Closet', '4:57');
+addTracks(theEminemShowTracks, 'Square Dance', '5:23');
+addTracks(theEminemShowTracks, 'The Kiss (skit)', '1:15');
+addTracks(theEminemShowTracks, 'Soldier', '3:46');
+addTracks(theEminemShowTracks, 'Say Goodbye Hollywood', '4:32');
+addTracks(theEminemShowTracks, 'Drips (featuring Obie Trice)', '4:45');
+addTracks(theEminemShowTracks, 'Without Me', '4:50');
+addTracks(theEminemShowTracks, 'Paul Rosenberg (skit)', '0:22');
+addTracks(theEminemShowTracks, 'Sing for the Moment', '5:39');
+addTracks(theEminemShowTracks, 'Superman', '5:50');
+addTracks(theEminemShowTracks, 'Hailie\'s Song', '5:20');
+addTracks(theEminemShowTracks, 'Steve Berman (skit)', '0:33');
+addTracks(theEminemShowTracks, 'When the Music Stops (featuring D12)', '4:29');
+addTracks(theEminemShowTracks, 'Say What You Say (featuring Dr. Dre)', '5:09');
+addTracks(theEminemShowTracks, 'Till I Collaps (featuring Nate Dogg)', '4:57');
+addTracks(theEminemShowTracks, 'My Dad\'s Gone Crazy (featuring Hailie Jade)', '4:27');
+addTracks(theEminemShowTracks, 'Curtains Close (skit)', '1:10');
 
+console.log(theEminemShowTracks);
 //-------------addToCollection()-------------//
-const addToCollection = (title, artist, yearPublished) => {
+const addToCollection = (title, artist, yearPublished, tracks) => {
   collection.push({
     title: title,
     artist: artist,
-    yearPublished: yearPublished
+    yearPublished: yearPublished,
+    tracks: tracks
   });
 };
 console.log('%c<<<<<<<<Testing addToCollection()>>>>>>>>', 'color: black; background-color: orange');
-addToCollection('The Eminem Show', 'Eminem', 2002);
+addToCollection('The Eminem Show', 'Eminem', 2002, theEminemShowTracks);
 console.log(collection[0]);
 addToCollection('Kamikaze', 'Eminem', 2018);
 console.log(collection[1]);
@@ -43,11 +72,15 @@ showCollection(collection);
 showCollection(500);
 
 //-------------findByArtist()-------------//
-const findByArtist = artist => {
+//array variable inserted for use with search().
+const findByArtist = (artist, array) => {
+  if (array === undefined) {
+    array = collection;
+  }
   let matches = [];
-  for (let i = 0; i < collection.length; i++) {
-    if (collection[i].artist === artist) {
-      matches.push(collection[i]);
+  for (let i = 0; i < array.length; i++) {
+    if (array[i].artist === artist) {
+      matches.push(array[i]);
     }
   }
   if (matches.length === 0) {
@@ -56,7 +89,7 @@ const findByArtist = artist => {
   }
   console.log(`This collection contains the following ${matches.length} albums by ${artist}:`);
   for (let j = 0; j < matches.length; j++) {
-    console.log(`${j + 1}. ${collection[j].title} by ${collection[j].artist}, published in the year ${collection[j].yearPublished}`);
+    console.log(`${j + 1}. ${matches[j].title} by ${matches[j].artist}, published in the year ${matches[j].yearPublished}`);
   }
   return matches;
 };
@@ -66,6 +99,210 @@ findByArtist('Eminem');
 findByArtist('Unspoken');
 findByArtist('Johnny Cash');
 
+//-------------findByTitle()-------------//
+const findByTitle = (title, array) => {
+  if (array === undefined) {
+    array = collection;
+  }
+  let matches = [];
+  for (let i = 0; i < array.length; i++) {
+    if (array[i].title === title) {
+      matches.push(array[i]);
+    }
+  }
+  if (matches.length === 0) {
+    console.log(`%cThere are no albums titled ${title} in this collection`, `color: black; background-color: red`);
+    return matches;
+  }
+  console.log(`This collection contains the following ${matches.length} albums titled ${title}:`);
+  for (let j = 0; j < matches.length; j++) {
+    console.log(`${j + 1}. ${matches[j].title} by ${matches[j].artist}, published in the year ${matches[j].yearPublished}`);
+  }
+  return matches;
+};
+
+console.log('%c<<<<<<<<Testing findByTitle()>>>>>>>>', 'color: black; background-color: orange');
+findByTitle('Kamikaze');
+
+//-------------findByYearPublished()-------------//
+const findByYearPublished = (yearPublished, array) => {
+  if (array === undefined) {
+    array = collection;
+  }
+  let matches = [];
+  for (let i = 0; i < array.length; i++) {
+    if (array[i].yearPublished === yearPublished) {
+      matches.push(array[i]);
+    }
+  }
+  if (matches.length === 0) {
+    console.log(`%cThere are no albums published in ${yearPublished} in this collection`, `color: black; background-color: red`);
+    return matches;
+  }
+  console.log(`This collection contains the following ${matches.length} published in ${yearPublished}:`);
+  for (let j = 0; j < matches.length; j++) {
+    console.log(`${j + 1}. ${matches[j].title} by ${matches[j].artist}, published in the year ${matches[j].yearPublished}`);
+  }
+  return matches;
+};
+
+console.log('%c<<<<<<<<Testing findByYearPublished()>>>>>>>>', 'color: black; background-color: orange');
+findByYearPublished(2002);
+findByYearPublished(2015);
+findByYearPublished(2020);
+
+
+console.log('%c<<<<<<<<Testing findByYearPublished()>>>>>>>>', 'color: black; background-color: orange');
+const findByArtistShort = (artist, array) => {
+  if (array === undefined) {
+    array = collection;
+  }
+  let matches = [];
+  for (let i = 0; i < array.length; i++) {
+    if (array[i].artist === artist) {
+      matches.push(array[i]);
+    }
+  }
+  return matches;
+};
+
+const findByTitleShort = (title, array) => {
+  if (array === undefined) {
+    array = collection;
+  }
+  let matches = [];
+  for (let i = 0; i < array.length; i++) {
+    if (array[i].title === title) {
+      matches.push(array[i]);
+    }
+  }
+  return matches;
+};
+
+const findByYearPublishedShort = (yearPublished, array) => {
+  if (array === undefined) {
+    array = collection;
+  }
+  let matches = [];
+  for (let i = 0; i < array.length; i++) {
+    if (array[i].yearPublished === yearPublished) {
+      matches.push(array[i]);
+    }
+  }
+  return matches;
+};
+
+const search = (album, artist, yearPublished) => {
+  let searchArr1 = [];
+  let searchArr2 = [];
+  if (album !== undefined) {
+    searchArr1 = findByTitleShort(album);
+  }
+
+  if (artist !== undefined) {
+    if (album) {
+      searchArr2 = findByArtistShort(artist, searchArr1);
+      searchArr1 = searchArr2;
+    } else {
+      searchArr1 = findByArtistShort(artist);
+    }
+  }
+
+  if (yearPublished !== undefined) {
+    if (album || artist) {
+      searchArr2 = findByYearPublishedShort(yearPublished);
+      searchArr1 = searchArr2;
+    } else {
+      searchArr1 = findByYearPublishedShort(yearPublished);
+    }
+  }
+
+
+
+  if (searchArr1.length === 0) {
+    console.log(`%cThere are no albums matching search criteria`, `color: black; background-color: red`);
+    return searchArr1;
+  }
+  for (let j = 0; j < searchArr1.length; j++) {
+    console.log(`${j + 1}. ${searchArr1[j].title} by ${searchArr1[j].artist}, published in the year ${searchArr1[j].yearPublished}`);
+  }
+
+
+
+  /*
+    let sw = '';
+    if (album && album !== '') {
+      sw += 'a';
+    }
+    if (artistn && artist !== '') {
+      sw += 'b';
+    }
+    if (yearPublished && yearPublished !== '') {
+      sw += 'c';
+    }
+
+    switch (sw) {
+      case 'a':
+        findByTitle(album);
+        break;
+      case 'b':
+        console.log('testB');
+        break;
+      case 'c':
+        console.log('testC');
+        break;
+      case 'ab':
+        console.log('testAB');
+        break;
+      case 'ac':
+        console.log('testAC');
+        break;
+      case 'bc':
+        console.log('testBC');
+        break;
+      case 'abc':
+        console.log('testABC');
+        break;
+    }*/
+};
+search('Kamikaze');
+search('Kamikaze', 'Eminem');
+search('', 'Eminem');
+search('Kamikaze', 'Eminem', 2018);
+search('Kamikaze', '', 2018);
+search('', 'Eminem', 2018);
+search('', '', 2018);
+
+console.log('search');
+window.onload = function() {
+  console.log(1);
+  const input = document.getElementById('searchIn');
+  console.log(2);
+  input.addEventListener('submit', event => {
+    console.log(3);
+    event.preventDefault();
+    let albumIn = document.getElementById('albumName').value;
+    console.log(albumIn);
+    let artistIn = document.getElementById('artistName').value;
+    console.log(artistIn);
+    let yearPublishedIn;
+    if (isNaN(parseInt(document.getElementById('yearPublished').value === 'number')) === false) {
+      yearPublishedIn = parseInt(document.getElementById('yearPublished').value);
+    }
+    console.log(yearPublishedIn);
+    search(albumIn, artistIn, yearPublishedIn);
+  });
+};
+
+/*search('Kamikaze');
+search('', 'Eminem');
+search('', '', 2002);
+search('Kamikaze', 'Eminem');
+search('', 'Eminem', 2002);
+search('Kamikaze', 'Eminem', 2002);*/
+
+
+/*So... this ended up being a lot more effort than taking advantage of an html form so I'm switching to that but will still test the fuction in JavaScript
 console.log('%cTo search collection type \"search()\" in the console', 'background-color: blue');
 let criteria1;
 let criteria2;
@@ -83,8 +320,7 @@ const searchInput = option => {
       let yearPublished = prompt('Please enter the year published');
       break;
     default:
-      console.log('Invalid input');
-      searchInput(option);
+       return ('Invalid input');
   }
 };
 
@@ -100,35 +336,69 @@ const option2 = criteria1 => {
       criteria2 = prompt('Would you also like to search by album or artist? Please enter album, artist, or no', 'album, artist, or no');
       break;
     default:
-      console.log('I\'m sorry but that was not an option');
-      option2(criteria1);
+      return ('Invalid input');
   }
-  return criteria2;
 };
 
 const option3 = (input1, input2) => {
   switch (input1, input2) {
-    case ('artist', 'album'):
+    case ('artist', 'album' || 'album', 'artist'):
       criteria3 = prompt('Would you also year published? Please enter year published or no', 'year published or no');
       break;
-    case ('album', 'yearPublished'):
+    case ('album', 'year published' || 'year published', 'album'):
       criteria3 = prompt('Would you also like to search by artist? Please enter artist or no', 'artist, or no');
       break;
-    case ('artist', 'year published'):
+    case ('artist', 'year published' || 'year published', 'artist'):
       criteria3 = prompt('Would you also like to search by album? Please enter album or no', 'album or no');
       break;
     default:
-      console.log('I\'m sorry but that was not an option');
-      option3(input1, input2);
+      return ('Invalid input');
   }
-  return criteria3;
 };
 
 const search = () => {
   criteria1 = prompt('Would you like to search by album, artist, or year published? Please enter album, artist, or year published', 'album, artist, or year published');
   let search1 = searchInput(criteria1);
+  if (search1 === 'Invalid input') {
+    let error = criteria1;
+    search1 = searchInput(error);
+  }
   criteria2 = option2(criteria1);
-  let search2 = searchInput(criteria2);
-  criteria3 = option3(criteria1, criteria2);
-  let search3 = searchInput(criteria3);
-};
+  if (criteria2 !== 'no') {
+    let search2 = searchInput(criteria2);
+    criteria3 = option3(criteria1, criteria2);
+    if (criteria3 !== 'no') {
+      let search3 = searchInput(criteria3);
+    }
+  }
+  console.log('Yay it didn\'t crash');
+};*/
+
+/*
+potential search cases
+
+*album
+  *artist
+    *year published
+    *no
+  -(crash)year published
+    -artist
+    -no
+  *no
+-artist
+  -album
+    -year published
+    -no
+  -year published
+    -album
+    -no
+  -no
+-year published
+  -album
+    -artist
+    -no
+  -artist
+    -year published
+    -no
+  -no
+*/
