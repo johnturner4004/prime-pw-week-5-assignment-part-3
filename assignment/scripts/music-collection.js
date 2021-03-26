@@ -29,6 +29,29 @@ addTracks(theEminemShowTracks, 'Till I Collaps (featuring Nate Dogg)', '4:57');
 addTracks(theEminemShowTracks, 'My Dad\'s Gone Crazy (featuring Hailie Jade)', '4:27');
 addTracks(theEminemShowTracks, 'Curtains Close (skit)', '1:10');
 
+//... so ya, after entering the entire tracklist from the Eminem Show, I'm just gonna
+//put some favs from the other albums. It'll still be enough to dempnstrate working functions.
+const kamikazeTracks = [];
+addTracks(kamikazeTracks, 'Kamikaze', '3:36');
+
+const iGetWetTracks = [];
+addTracks(iGetWetTracks, 'Party Hard', '3:04');
+addTracks(iGetWetTracks, 'Ready to Die', '2:54');
+
+const endOfAnEmpireTracks = [];
+addTracks(endOfAnEmpireTracks, 'End of an Empire', '7:33');
+addTracks(endOfAnEmpireTracks, 'Good L_ck (Yo_\'re F_cked)', '3:36');
+
+const unspokenTracks = [];
+addTracks(unspokenTracks, 'Start a Fire', '3:05');
+addTracks(unspokenTracks, 'Call it Grace', '4:00');
+
+const theFoundationTracks = [];
+addTracks(theFoundationTracks, 'Toes', '4:21');
+addTracks(theFoundationTracks, 'Whatever It Is', '3:29');
+addTracks(theFoundationTracks, 'Chicken Fried', '3:58');
+addTracks(theFoundationTracks, 'Sic \'em on a Chicken', '3:51');
+
 console.log(theEminemShowTracks);
 //-------------addToCollection()-------------//
 const addToCollection = (title, artist, yearPublished, tracks) => {
@@ -42,17 +65,17 @@ const addToCollection = (title, artist, yearPublished, tracks) => {
 console.log('%c<<<<<<<<Testing addToCollection()>>>>>>>>', 'color: black; background-color: orange');
 addToCollection('The Eminem Show', 'Eminem', 2002, theEminemShowTracks);
 console.log(collection[0]);
-/*addToCollection('Kamikaze', 'Eminem', 2018);
+addToCollection('Kamikaze', 'Eminem', 2018, kamikazeTracks);
 console.log(collection[1]);
-addToCollection('I Get Wet', 'Andrew W.K.', 2001);
+addToCollection('I Get Wet', 'Andrew W.K.', 2001, iGetWetTracks);
 console.log(collection[2]);
-addToCollection('End of an Empire', 'Celldweller', 2015);
+addToCollection('End of an Empire', 'Celldweller', 2015, endOfAnEmpireTracks);
 console.log(collection[3]);
-addToCollection('Unspoken', 'Unspoken', 2014);
+addToCollection('Unspoken', 'Unspoken', 2014, unspokenTracks);
 console.log(collection[4]);
-addToCollection('Long Black Train', 'Josh Turner', 2003);
+addToCollection('The Foundation', 'Zac Brown Band', 2008, theFoundationTracks);
 console.log(collection[5]);
-console.log(collection);*/
+console.log(collection);
 
 //-------------showCollection()-------------//
 const showCollection = collection => {
@@ -63,9 +86,9 @@ const showCollection = collection => {
   console.log(`This collection contailns the following ${collection.length} items:`);
   //for loop used to print all the title, artist, and yearPublished from each object in the array in a list.
   for (let i = 0; i < collection.length; i++) {
-    console.log(`${i + 1}. ${collection[i].title} by ${collection[i].artist}, published in the year ${collection[i].yearPublished}:`);
+    console.log(`%c${i + 1}. ${collection[i].title} by ${collection[i].artist}, published in the year ${collection[i].yearPublished}:`, `color: limegreen`);
     for (let j = 0; j < collection[i].tracks.length; j++)
-      console.log(`${j + 1}. ${collection[i].tracks[j].trackName}: ${collection[i].tracks[j].duration}`);
+      console.log(`\t${j + 1}. ${collection[i].tracks[j].trackName}: ${collection[i].tracks[j].duration}`);
   }
 };
 
