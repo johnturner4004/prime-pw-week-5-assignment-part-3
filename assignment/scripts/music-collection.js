@@ -42,7 +42,7 @@ const addToCollection = (title, artist, yearPublished, tracks) => {
 console.log('%c<<<<<<<<Testing addToCollection()>>>>>>>>', 'color: black; background-color: orange');
 addToCollection('The Eminem Show', 'Eminem', 2002, theEminemShowTracks);
 console.log(collection[0]);
-addToCollection('Kamikaze', 'Eminem', 2018);
+/*addToCollection('Kamikaze', 'Eminem', 2018);
 console.log(collection[1]);
 addToCollection('I Get Wet', 'Andrew W.K.', 2001);
 console.log(collection[2]);
@@ -52,7 +52,7 @@ addToCollection('Unspoken', 'Unspoken', 2014);
 console.log(collection[4]);
 addToCollection('Long Black Train', 'Josh Turner', 2003);
 console.log(collection[5]);
-console.log(collection);
+console.log(collection);*/
 
 //-------------showCollection()-------------//
 const showCollection = collection => {
@@ -63,7 +63,9 @@ const showCollection = collection => {
   console.log(`This collection contailns the following ${collection.length} items:`);
   //for loop used to print all the title, artist, and yearPublished from each object in the array in a list.
   for (let i = 0; i < collection.length; i++) {
-    console.log(`${i + 1}. ${collection[i].title} by ${collection[i].artist}, published in the year ${collection[i].yearPublished}`);
+    console.log(`${i + 1}. ${collection[i].title} by ${collection[i].artist}, published in the year ${collection[i].yearPublished}:`);
+    for (let j = 0; j < collection[i].tracks.length; j++)
+      console.log(`${j + 1}. ${collection[i].tracks[j].trackName}: ${collection[i].tracks[j].duration}`);
   }
 };
 
