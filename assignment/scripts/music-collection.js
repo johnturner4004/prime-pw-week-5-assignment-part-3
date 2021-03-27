@@ -2,12 +2,15 @@ console.log('***** Music Collection *****');
 //empty array variable to hold objects containing data about albums in collection.
 const collection = [];
 
+//This function will add tracks to a track array to be used with addToCollection
 function addTracks(array, trackName, duration) {
   array.push({
     trackName: trackName,
     duration: duration
   });
 }
+
+//Made some track arrays to test functions
 const theEminemShowTracks = [];
 addTracks(theEminemShowTracks, 'Curtains Up', '0:30');
 addTracks(theEminemShowTracks, 'White America', '5:24');
@@ -53,8 +56,12 @@ addTracks(theFoundationTracks, 'Whatever It Is', '3:29');
 addTracks(theFoundationTracks, 'Chicken Fried', '3:58');
 addTracks(theFoundationTracks, 'Sic \'em on a Chicken', '3:51');
 
+//this logs one of the arrays to check if addTracks is working correctly
 console.log(theEminemShowTracks);
+
+
 //-------------addToCollection()-------------//
+//This function adds new albums to the collection array
 const addToCollection = (title, artist, yearPublished, tracks) => {
   collection.push({
     title: title,
@@ -63,6 +70,7 @@ const addToCollection = (title, artist, yearPublished, tracks) => {
     tracks: tracks
   });
 };
+
 console.log('%c<<<<<<<<Testing addToCollection()>>>>>>>>', 'color: black; background-color: orange');
 addToCollection('The Eminem Show', 'Eminem', 2002, theEminemShowTracks);
 console.log(collection[0]);
@@ -76,11 +84,14 @@ addToCollection('Unspoken', 'Unspoken', 2014, unspokenTracks);
 console.log(collection[4]);
 addToCollection('The Foundation', 'Zac Brown Band', 2008, theFoundationTracks);
 console.log(collection[5]);
+//loged collection to check if addToCollection is working properly
 console.log(collection);
 
+
 //-------------showCollection()-------------//
+//This function shows the entire collection and prints the album, artist, year published, and tracks in an easy to read console.log
 const showCollection = collection => {
-  //Ensures that input is an array and returns error message if it is not.
+  //Ensures that input is an array and returns error message if it is not. While not necessary in this particular project, makes function more flexible if project were larger and contained more than one collection. I could have just used the collection array established above without the if statement to insure someone passed an incorrect value into the function.
   if (Array.isArray(collection) === false) {
     return console.log('%cInvalid input. Collection must be an array', 'color: black; background-color: red');
   }
@@ -88,6 +99,7 @@ const showCollection = collection => {
   //for loop used to print all the title, artist, and yearPublished from each object in the array in a list.
   for (let i = 0; i < collection.length; i++) {
     console.log(`%c${i + 1}. ${collection[i].title} by ${collection[i].artist}, published in the year ${collection[i].yearPublished}:`, `color: limegreen`);
+    //second for loop to print tracks under the corresponding album
     for (let j = 0; j < collection[i].tracks.length; j++) {
       console.log(`\t${j + 1}. ${collection[i].tracks[j].trackName}: ${collection[i].tracks[j].duration}`);
     }
