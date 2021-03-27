@@ -1,6 +1,7 @@
 console.log('***** Music Collection *****');
 //empty array variable to hold objects containing data about albums in collection.
 const collection = [];
+
 function addTracks(array, trackName, duration) {
   array.push({
     trackName: trackName,
@@ -87,8 +88,9 @@ const showCollection = collection => {
   //for loop used to print all the title, artist, and yearPublished from each object in the array in a list.
   for (let i = 0; i < collection.length; i++) {
     console.log(`%c${i + 1}. ${collection[i].title} by ${collection[i].artist}, published in the year ${collection[i].yearPublished}:`, `color: limegreen`);
-    for (let j = 0; j < collection[i].tracks.length; j++)
+    for (let j = 0; j < collection[i].tracks.length; j++) {
       console.log(`\t${j + 1}. ${collection[i].tracks[j].trackName}: ${collection[i].tracks[j].duration}`);
+    }
   }
 };
 
@@ -177,7 +179,7 @@ findByYearPublished(2015);
 findByYearPublished(2020);
 
 
-console.log('%c<<<<<<<<Testing findByYearPublished()>>>>>>>>', 'color: black; background-color: orange');
+console.log('%c<<<<<<<<Testing search()>>>>>>>>', 'color: black; background-color: orange');
 const findByArtistShort = (artist, array) => {
   if (array === undefined) {
     array = collection;
@@ -217,9 +219,32 @@ const findByYearPublishedShort = (yearPublished, array) => {
   return matches;
 };
 
-const search = (album, artist, yearPublished) => {
+console.log('%c<<<<<<<<Testing search()>>>>>>>>', 'color: black; background-color: orange');
+const findByTrack = (track, array) => {
+  if (array === undefined) {
+    array = collection;
+  }
+  let matches = [];
+  for (let i = 0; i < array.length; i++) {
+    for (j = 0; j < array[i].tracks.length; j++) {
+      if (array[i].tracks[j].trackName === track) {
+        matches.push(array[i]);
+      }
+    }
+  }
+  return matches;
+};
+console.log(findByTrack('Without Me'));
+console.log(findByTrack('Chicken Fried'));
+
+
+
+const search = (album, artist, yearPublished, trackName) => {
+  let output = document.getElementById('output');
+  output.innerHTML = '';
   let searchArr1 = [];
   let searchArr2 = [];
+
   if (album !== undefined) {
     searchArr1 = findByTitleShort(album);
   }
@@ -235,21 +260,38 @@ const search = (album, artist, yearPublished) => {
 
   if (yearPublished !== undefined) {
     if (album || artist) {
-      searchArr2 = findByYearPublishedShort(yearPublished);
+      searchArr2 = findByYearPublishedShort(yearPublished, searchArr1);
       searchArr1 = searchArr2;
     } else {
       searchArr1 = findByYearPublishedShort(yearPublished);
     }
   }
 
-
+  if (trackName !== undefined) {
+    if (album || artist || yearPublished) {
+      searchArr2 = findByTrack(trackName, searchArr1);
+      searchArr1 = searchArr2;
+    } else {
+      searchArr1 = findByTrack(trackName);
+      console.log(searchArr1);
+    }
+  }
+  if (album === undefined && artist === undefined && yearPublished == undefined && trackName == undefined) {
+    searchArr1 = collection;
+  }
 
   if (searchArr1.length === 0) {
-    console.log(`%cThere are no albums matching search criteria`, `color: black; background-color: red`);
+    console.log(`%cThere are no albums or tracks matching search criteria`, `color: black; background-color: red`);
+    document.getElementById('output').innerHTML = `There are no albums or tracks matching search criteria`;
     return searchArr1;
   }
   for (let j = 0; j < searchArr1.length; j++) {
-    console.log(`${j + 1}. ${searchArr1[j].title} by ${searchArr1[j].artist}, published in the year ${searchArr1[j].yearPublished}`);
+    console.log(`%c${j + 1}. ${searchArr1[j].title} by ${searchArr1[j].artist}, published in the year ${searchArr1[j].yearPublished}`, `color: limegreen`);
+    output.innerHTML+= `<p class="title">` + `${j + 1}. ${searchArr1[j].title} by ${searchArr1[j].artist}, published in the year ${searchArr1[j].yearPublished}`;
+    for (let k = 0; k < searchArr1[j].tracks.length; k++) {
+      console.log(`\t${k + 1}. ${searchArr1[j].tracks[k].trackName}: ${searchArr1[j].tracks[k].duration}`);
+      output.innerHTML+= `&nbsp` + `&nbsp` + `&nbsp` + `${k + 1}. ${searchArr1[j].tracks[k].trackName}: ${searchArr1[j].tracks[k].duration}` + `<br>`;
+    }
   }
 
 
@@ -290,15 +332,27 @@ const search = (album, artist, yearPublished) => {
         break;
     }*/
 };
+/*console.log(1);
 search('Kamikaze');
+console.log(2);
 search('Kamikaze', 'Eminem');
+console.log(3);
 search('', 'Eminem');
+console.log(4);
 search('Kamikaze', 'Eminem', 2018);
-search('Kamikaze', '', 2018);
+console.log(5);
+search('Kamikaze', undefined, 2018);
+console.log(6);
 search('', 'Eminem', 2018);
+console.log(7);
 search('', '', 2018);
+console.log(8);
+search('The Foundation');
+console.log(9);
+search('', '', '', 'Chicken Fried');
+console.log(10);
+search();*/
 
-console.log('search');
 window.onload = function() {
   console.log(1);
   const input = document.getElementById('searchIn');
@@ -307,25 +361,24 @@ window.onload = function() {
     console.log(3);
     event.preventDefault();
     let albumIn = document.getElementById('albumName').value;
+    if (albumIn === '') {
+      albumIn = undefined;
+    }
     console.log(albumIn);
     let artistIn = document.getElementById('artistName').value;
     console.log(artistIn);
+    if (artistIn === '') {
+      artistIn = undefined;
+    }
     let yearPublishedIn;
-    if (isNaN(parseInt(document.getElementById('yearPublished').value === 'number')) === false) {
+    if (isNaN(parseInt(document.getElementById('yearPublished').value)) === false) {
       yearPublishedIn = parseInt(document.getElementById('yearPublished').value);
     }
     console.log(yearPublishedIn);
     search(albumIn, artistIn, yearPublishedIn);
+
   });
 };
-
-/*search('Kamikaze');
-search('', 'Eminem');
-search('', '', 2002);
-search('Kamikaze', 'Eminem');
-search('', 'Eminem', 2002);
-search('Kamikaze', 'Eminem', 2002);*/
-
 
 /*So... this ended up being a lot more effort than taking advantage of an html form so I'm switching to that but will still test the fuction in JavaScript
 console.log('%cTo search collection type \"search()\" in the console', 'background-color: blue');
