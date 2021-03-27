@@ -10,12 +10,16 @@
 <body>
   <header>
     <h1>Week 5 Assignment - Part 3</h1>
+    <!--yes you read that right. it's awesome.-->
     <h2>John's Awesome Music Collection Search</h2>
   </header>
   <main>
+    <!--div to input arguments for the search function-->
     <div class="input">
     <p class='console'>See console for output.</p>
+    <!--sends the form fields to the javascript when submit button is clicked-->
     <form id="searchIn" onsubmit="search()">
+      <!--the following items label each input box and define their input type, id, and name which music-collection.js will use to retrive the arguments for the search function-->
       <label for="albumName">Album name:</label><br />
       <input type="text" id="albumName" name="albumName" /><br />
       <label for="artistName">Artist name:</label><br />
@@ -29,7 +33,9 @@
     </div>
     <br></br>
     <div class="results">
+      <!--location for search to output search results into webpage-->
       <p id='output'>
+        <!--script src is down here because it needed to be after the "output" id for it to work correctly.-->
         <script src="scripts/music-collection.js" charset="utf-8"></script>
       </p>
     </div>
