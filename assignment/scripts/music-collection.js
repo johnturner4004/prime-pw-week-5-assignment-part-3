@@ -290,48 +290,11 @@ const search = (album, artist, yearPublished, trackName) => {
     output.innerHTML+= `<p class="title">` + `${j + 1}. ${searchArr1[j].title} by ${searchArr1[j].artist}, published in the year ${searchArr1[j].yearPublished}`;
     for (let k = 0; k < searchArr1[j].tracks.length; k++) {
       console.log(`\t${k + 1}. ${searchArr1[j].tracks[k].trackName}: ${searchArr1[j].tracks[k].duration}`);
-      output.innerHTML+= `&nbsp` + `&nbsp` + `&nbsp` + `${k + 1}. ${searchArr1[j].tracks[k].trackName}: ${searchArr1[j].tracks[k].duration}` + `<br>`;
+      output.innerHTML+= `${k + 1}. ${searchArr1[j].tracks[k].trackName}: ${searchArr1[j].tracks[k].duration}` + `<br>`;
     }
   }
-
-
-
-  /*
-    let sw = '';
-    if (album && album !== '') {
-      sw += 'a';
-    }
-    if (artistn && artist !== '') {
-      sw += 'b';
-    }
-    if (yearPublished && yearPublished !== '') {
-      sw += 'c';
-    }
-
-    switch (sw) {
-      case 'a':
-        findByTitle(album);
-        break;
-      case 'b':
-        console.log('testB');
-        break;
-      case 'c':
-        console.log('testC');
-        break;
-      case 'ab':
-        console.log('testAB');
-        break;
-      case 'ac':
-        console.log('testAC');
-        break;
-      case 'bc':
-        console.log('testBC');
-        break;
-      case 'abc':
-        console.log('testABC');
-        break;
-    }*/
 };
+
 /*console.log(1);
 search('Kamikaze');
 console.log(2);
@@ -375,108 +338,12 @@ window.onload = function() {
       yearPublishedIn = parseInt(document.getElementById('yearPublished').value);
     }
     console.log(yearPublishedIn);
-    search(albumIn, artistIn, yearPublishedIn);
+    let trackIn = document.getElementById('track').value;
+    console.log(trackIn);
+    if (trackIn === '') {
+      trackIn = undefined;
+    }
+    search(albumIn, artistIn, yearPublishedIn, trackIn);
 
   });
 };
-
-/*So... this ended up being a lot more effort than taking advantage of an html form so I'm switching to that but will still test the fuction in JavaScript
-console.log('%cTo search collection type \"search()\" in the console', 'background-color: blue');
-let criteria1;
-let criteria2;
-let criteria3;
-
-const searchInput = option => {
-  switch (option) {
-    case 'album':
-      let album = prompt('Please enter the album name');
-      break;
-    case 'artist':
-      let artist = prompt('Please enter the artist name');
-      break;
-    case 'year published':
-      let yearPublished = prompt('Please enter the year published');
-      break;
-    default:
-       return ('Invalid input');
-  }
-};
-
-const option2 = criteria1 => {
-  switch (criteria1) {
-    case 'artist':
-      criteria2 = prompt('Would you also like to search by album or year published? Please enter album, year published, or no', 'album, year published, or no');
-      break;
-    case 'album':
-      criteria2 = prompt('Would you also like to search by artist or year published? Please enter artist, year published, or no', 'artist, year published, or no');
-      break;
-    case 'year published':
-      criteria2 = prompt('Would you also like to search by album or artist? Please enter album, artist, or no', 'album, artist, or no');
-      break;
-    default:
-      return ('Invalid input');
-  }
-};
-
-const option3 = (input1, input2) => {
-  switch (input1, input2) {
-    case ('artist', 'album' || 'album', 'artist'):
-      criteria3 = prompt('Would you also year published? Please enter year published or no', 'year published or no');
-      break;
-    case ('album', 'year published' || 'year published', 'album'):
-      criteria3 = prompt('Would you also like to search by artist? Please enter artist or no', 'artist, or no');
-      break;
-    case ('artist', 'year published' || 'year published', 'artist'):
-      criteria3 = prompt('Would you also like to search by album? Please enter album or no', 'album or no');
-      break;
-    default:
-      return ('Invalid input');
-  }
-};
-
-const search = () => {
-  criteria1 = prompt('Would you like to search by album, artist, or year published? Please enter album, artist, or year published', 'album, artist, or year published');
-  let search1 = searchInput(criteria1);
-  if (search1 === 'Invalid input') {
-    let error = criteria1;
-    search1 = searchInput(error);
-  }
-  criteria2 = option2(criteria1);
-  if (criteria2 !== 'no') {
-    let search2 = searchInput(criteria2);
-    criteria3 = option3(criteria1, criteria2);
-    if (criteria3 !== 'no') {
-      let search3 = searchInput(criteria3);
-    }
-  }
-  console.log('Yay it didn\'t crash');
-};*/
-
-/*
-potential search cases
-
-*album
-  *artist
-    *year published
-    *no
-  -(crash)year published
-    -artist
-    -no
-  *no
--artist
-  -album
-    -year published
-    -no
-  -year published
-    -album
-    -no
-  -no
--year published
-  -album
-    -artist
-    -no
-  -artist
-    -year published
-    -no
-  -no
-*/

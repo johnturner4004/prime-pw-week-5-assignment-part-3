@@ -1,5 +1,71 @@
-@import 'config'
+@import 'config';
 
 header {
-  
+  background-color: $primary-color;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  color: set-text-color($primary-color);
+  border-bottom: 10px solid;
+  border-image-source: linear-gradient(110deg, #ee82ee, #4B0082, #0000ff, #008000, #ffff00, #ffa500, #ff0000);
+  border-image-slice: 1;
+  text-shadow: 2px 2px #000;
 }
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+}
+
+body {
+  background-image: url(../record.png);
+  background-size: 15vw;
+  background-repeat: repeat;
+  background-color: $secondary-color;
+}
+
+.console {
+  font-size: 1.5rem;
+  color: set-text-color($primary-color);
+}
+
+.input {
+  background-color: $primary-color;
+  color: set-text-color($primary-color);
+  border: 2px solid #000;
+  border-radius: 10px;
+  width: fit-content;
+  padding: 2vw;
+  margin: 2vw 2vw 0 2vw;
+  text-shadow: 1px 1px #000;
+}
+
+.title {
+  font-size: 2rem;
+  color: limegreen;
+  margin-left: -3vw;
+  border-bottom: 2px solid limegreen;
+  width: 102%
+}
+
+.results{
+  margin: 0 2vw 2vw 2vw;
+  padding: 2vw 2vw 2vw 5vw;
+  background-color: $primary-color;
+  color: set-text-color($primary-color);
+  width: 96vw;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 2px solid black;
+  border-radius: 10px;
+  text-shadow: 1px 1px #000;
+}
+
+

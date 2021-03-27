@@ -10,22 +10,29 @@
 <body>
   <header>
     <h1>Week 5 Assignment - Part 3</h1>
+    <h2>John's Awesome Music Collection Search</h2>
   </header>
   <main>
-    <p>See console for output.</p>
+    <div class="input">
+    <p class='console'>See console for output.</p>
     <form id="searchIn" onsubmit="search()">
       <label for="albumName">Album name:</label><br />
       <input type="text" id="albumName" name="albumName" /><br />
       <label for="artistName">Artist name:</label><br />
       <input type="text" id="artistName" name="artistName" /><br />
       <label for="yearPublished">Year published:</label><br />
-      <input type="text" id="yearPublished" name="yearPublished" /><br /><br>
+      <input type="text" id="yearPublished" name="yearPublished" /><br />
+      <label for="track">Track title:</label><br />
+      <input type="text" id="track" name="track" /><br /><br>
       <input type="submit" />
     </form>
+    </div>
     <br></br>
-    <p id='output'>
-      <script src="scripts/music-collection.js" charset="utf-8"></script>
-    </p>
+    <div class="results">
+      <p id='output'>
+        <script src="scripts/music-collection.js" charset="utf-8"></script>
+      </p>
+    </div>
   </main>
     <!-- Create an unordered list with any questions you have -->
   </body>
